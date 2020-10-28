@@ -1,3 +1,8 @@
 {
-  "editor.codeActionsOnSave": true
+  "editor.codeActionsOnSave": true,
+  "extensions.ignoreRecommendations": true,
+  "files.autoSave": "off",
+  "typescript.tsc.autoDetect": "off"
+}
+
 }
