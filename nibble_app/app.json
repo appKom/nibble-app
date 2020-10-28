@@ -1,0 +1,12 @@
+{
+  "name": "nibble_app",
+  "displayName": "nibble_app",
+  "expo": {
+    "name": "nibble_app",
+    "slug": "nibble_app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
