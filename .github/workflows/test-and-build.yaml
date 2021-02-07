@@ -1,0 +1,27 @@
+name: Test and Build
+
+on: [pull_request, issues]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.8.1"
+      - uses: actions/checkout@v1
+      - uses: actions/cache@v1.1.2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Prettier check
+        run: npm run prettier-check
+      - name: Run eslint check
+        run: npm run eslint-check
+      - name: Run tests
+        run: npm run test
+      - name: Build application
+        run: npm run build
