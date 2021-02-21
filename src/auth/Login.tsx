@@ -10,7 +10,6 @@ const Login = () => {
     const getUser = async () => {
       userManager.getUser().then((user) => {
         if (user) {
-          console.log(user);
           setAuth(user);
         } else {
           userManager
