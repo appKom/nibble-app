@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, useRecoilState } from "recoil";
 
 type CartItem = {name: string, price: number, quantity: number}
 
@@ -6,6 +6,11 @@ const cartState = atom<CartItem[]>({
   key: "auth",
   default: [],
 });
+
+export const useGetCartTotal = () => {
+  const [cart] = useRecoilState(cartState);
+  return cart.reduce((previousValue, currentValue) => previousValue + currentValue.price * currentValue.quantity, 0);
+}
 
 export const addCartItem = (cart: CartItem[], cartItem: CartItem) => {
     const cartItemIndex = cart.findIndex(item => item.name === cartItem.name);

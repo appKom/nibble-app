@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useGetCartTotal } from "state/cart";
 import styled from "styled-components";
 import { OnlineBlue } from "utils/colors";
 
@@ -8,6 +9,7 @@ type Props = {
 };
 
 const BottomNavigationBar = ({ className }: Props) => {
+  const cartTotal = useGetCartTotal();
   return (
     <nav className={className}>
       <LinkWrapper>
@@ -18,7 +20,7 @@ const BottomNavigationBar = ({ className }: Props) => {
           <Link to="/profile">Profile</Link>
         </StyledLink>
         <StyledLink>
-          <Link to="/cart">Cart</Link>
+          <Link to="/cart">Cart {cartTotal}kr</Link>
         </StyledLink>
       </LinkWrapper>
     </nav>
