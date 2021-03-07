@@ -1,14 +1,23 @@
+import Login from "auth/Login";
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <RecoilRoot>
+      <Router>
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <App />
+        </Switch>
+      </Router>
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")
 );

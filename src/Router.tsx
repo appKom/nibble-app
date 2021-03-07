@@ -1,16 +1,16 @@
 import Cart from "pages/Cart";
-import Login from "pages/Login";
 import Profile from "pages/Profile";
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import authState from "state/auth";
 import Products from "./pages/Products";
 
 const Router = () => {
+  const [auth] = useRecoilState(authState);
+  if (!auth) return <Redirect to="/login" />;
   return (
     <Switch>
-      <Route path="/login">
-        <Login />
-      </Route>
       <Route path="/products">
         <Products />
       </Route>
