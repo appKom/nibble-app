@@ -1,6 +1,6 @@
 import { atom, useRecoilState } from "recoil";
 
-type CartItem = {name: string, price: number, quantity: number}
+export type CartItem = {name: string, price: number, quantity: number}
 
 const cartState = atom<CartItem[]>({
   key: "auth",
