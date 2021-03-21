@@ -41,7 +41,7 @@ type Props = {
 export const Product = (props: Props) => {
     const [cart, setCart] = useRecoilState(cartState);
     const { product } = props
-    const imageSrc = product.image ? IMAGE_URI(product.image.sm) : "";
+    const imageSrc = product.image ? IMAGE_URI(product.image.sm) : `${process.env.PUBLIC_URL}/images/noImage.png`;
     const cartItem = {name: product.name, price: product.price, quantity: 1};
     return (
         <Wrapper onClick={() => setCart(addCartItem(cart, cartItem))}>
