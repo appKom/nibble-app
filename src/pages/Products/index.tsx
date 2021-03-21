@@ -17,9 +17,9 @@ const Products = () => {
   return (
     <div>
       <Wrapper>
-      {inventory?.map((product) => 
-        <Product product={product} key={product.pk}/>
-      )}
+        {inventory?.map((product) => (
+          <Product product={product} key={product.pk} />
+        ))}
       </Wrapper>
       <BottomNavigationBar />
     </div>
