@@ -1,7 +1,9 @@
+import { IMAGE_URI } from 'api'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import cartState, { addCartItem } from 'state/cart'
 import styled from 'styled-components'
+import { Product as ProductType} from 'types/inventory'
 
 const Wrapper = styled.div`
 width: 40%;
@@ -33,18 +35,22 @@ const Description = styled.p`
 text-align: left;
 font-weight: 200;
 `
-
-export const Product = () => {
+type Props = {
+    product: ProductType,
+};
+export const Product = (props: Props) => {
     const [cart, setCart] = useRecoilState(cartState);
-    const pk = {name: "Powerking", price: 10, quantity: 1};
+    const { product } = props
+    const imageSrc = product.image ? IMAGE_URI(product.image.sm) : "";
+    const cartItem = {name: product.name, price: product.price, quantity: 1};
     return (
-        <Wrapper onClick={() => setCart(addCartItem(cart, pk))}>
-            <Image src="https://res.cloudinary.com/norgesgruppen/image/upload/c_pad,b_white,f_auto,h_840,w_840,q_auto:eco/v1534761968/Product/7611612221771.jpg"></Image>
+        <Wrapper onClick={() => setCart(addCartItem(cart, cartItem))}>
+            <Image src={imageSrc}></Image>
             <TextWrapper>
-            <Name>Tittel</Name>
-            <Price>Pris</Price>
+            <Name>{product.name}</Name>
+            <Price>{product.price}kr</Price>
             </TextWrapper>
-            <Description>Beskrivelse</Description>
+            <Description>{product.description}</Description>
         </Wrapper>
     )
 }
