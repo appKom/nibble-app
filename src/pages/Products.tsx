@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const Products = () => {
-  const [inventory, setInventory] = useRecoilState(inventoryState);
+  const [inventory] = useRecoilState(inventoryState);
   return (
     <div>
       <Wrapper>

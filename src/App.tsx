@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import inventoryState from "state/inventory";
 
 const App = () => {
-  const [inventory, setInventory] = useRecoilState(inventoryState);
+  const [,setInventory] = useRecoilState(inventoryState);
   useEffect(() => {
     const getData = async () => {
       const data = await fetchInventory(INVENTORY_URI);
