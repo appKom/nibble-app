@@ -6,6 +6,7 @@ import { OnlineBlue } from "utils/colors";
 import { BiFoodMenu } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Box } from "@chakra-ui/react";
 
 type Props = {
   className?: string;
@@ -14,7 +15,7 @@ type Props = {
 const BottomNavigationBar = ({ className }: Props) => {
   const cartTotal = useGetCartTotal();
   return (
-    <nav className={className}>
+    <Box as="nav" className={className}>
       <LinkWrapper>
         <StyledListElement>
           <StyledLink to="/products">
@@ -33,7 +34,7 @@ const BottomNavigationBar = ({ className }: Props) => {
           </StyledLink>
         </StyledListElement>
       </LinkWrapper>
-    </nav>
+    </Box>
   );
 };
 

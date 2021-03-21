@@ -4,9 +4,10 @@ import BaseStyle from "BaseStyle";
 import { fetchInventory, INVENTORY_URI } from "./api";
 import { useRecoilState } from "recoil";
 import inventoryState from "state/inventory";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const App = () => {
-  const [,setInventory] = useRecoilState(inventoryState);
+  const [, setInventory] = useRecoilState(inventoryState);
   useEffect(() => {
     const getData = async () => {
       const data = await fetchInventory(INVENTORY_URI);
@@ -16,10 +17,10 @@ const App = () => {
   }, [setInventory]);
 
   return (
-    <>
+    <ChakraProvider>
       <BaseStyle />
       <Router />
-    </>
+    </ChakraProvider>
   );
 };
 

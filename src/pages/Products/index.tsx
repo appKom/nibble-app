@@ -1,8 +1,9 @@
-import BottomNavigationBar from "components/BottomNavigationBar";
-import { Product } from "components/Product";
+import React from "react";
 import { useRecoilState } from "recoil";
-import inventoryState from "state/inventory";
 import styled from "styled-components";
+import BottomNavigationBar from "components/BottomNavigationBar";
+import inventoryState from "state/inventory";
+import { Product } from "./Product";
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,9 +18,9 @@ const Products = () => {
   return (
     <div>
       <Wrapper>
-      {inventory?.map((product) => 
-        <Product product={product} key={product.pk}/>
-      )}
+        {inventory?.map((product) => (
+          <Product product={product} key={product.pk} />
+        ))}
       </Wrapper>
       <BottomNavigationBar />
     </div>

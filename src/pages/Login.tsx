@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+import userManager from "utils/oidc";
+import { Redirect } from "react-router-dom";
+import { useUser } from "state/auth";
 
 const Login = () => {
-  return (
-    <div>
-      <p>Login</p>
-      <button>
-        <Link to="/">Login</Link>
-      </button>
-    </div>
-  );
+  const user = useUser();
+  const signInWithRedirect = () => userManager.signinRedirect();
+  console.log("user", user);
+  if (user) {
+    return <Redirect to="/" />;
+  }
+  return <button onClick={signInWithRedirect}>Klikk</button>;
 };
 
 export default Login;
