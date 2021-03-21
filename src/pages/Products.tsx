@@ -1,5 +1,7 @@
 import BottomNavigationBar from "components/BottomNavigationBar";
 import { Product } from "components/Product";
+import { useRecoilState } from "recoil";
+import inventoryState from "state/inventory";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -11,21 +13,13 @@ const Wrapper = styled.div`
 `;
 
 const Products = () => {
+  const [inventory] = useRecoilState(inventoryState);
   return (
     <div>
       <Wrapper>
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
+      {inventory?.map((product) => 
+        <Product product={product} key={product.pk}/>
+      )}
       </Wrapper>
       <BottomNavigationBar />
     </div>
