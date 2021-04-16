@@ -28,7 +28,6 @@ export const addCartItem = (cart: CartItem[], cartItem: CartItem) => {
   const filteredCart = cart.filter((item) => item.name !== cartItem.name);
   return [...filteredCart, mutatedCartItem];
 };
-<<<<<<< HEAD
 
 export const reduceCartItem = (cart: CartItem[], cartItem: CartItem) => {
   const cartItemIndex = cart.findIndex((item) => item.name === cartItem.name);
@@ -54,7 +53,5 @@ export const deleteCartItem = (cart: CartItem[], cartItem: CartItem) => {
   const filteredCart = cart.filter((item) => item.name !== cartItem.name);
   return [...filteredCart];
 };
-=======
->>>>>>> c0f5bae1816d01f482e9e86c01a47ba389ff8ae8
 
 export default cartState;
