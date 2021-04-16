@@ -4,7 +4,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import authState from "state/auth";
-import Products from "./pages/Products";
+import Products from "pages/Products";
 
 const Router = () => {
   const [auth] = useRecoilState(authState);

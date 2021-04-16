@@ -1,4 +1,4 @@
-import Login from "auth/Login";
+import Login from "pages/Login";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
