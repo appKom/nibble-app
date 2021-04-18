@@ -4,13 +4,13 @@ import { useRecoilState } from "recoil";
 import cartState, {
   useGetCartTotal
 } from "state/cart";
-import styled from "styled-components";
+//import styled from "styled-components";
 import CartItem from "./Item";
 
 const Cart = () => {
   // const [cart] = useRecoilState(cartState);
   const cartTotal = useGetCartTotal();
-  const [cart, setCart] = useRecoilState(cartState);
+  const [cart] = useRecoilState(cartState);
   //const pk = { name: "Powerking", price: 10, quantity: 1 };
   console.log(cart);
   const buy = () => {
