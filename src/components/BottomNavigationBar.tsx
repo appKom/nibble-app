@@ -19,18 +19,18 @@ const BottomNavigationBar = ({ className }: Props) => {
       <LinkWrapper>
         <StyledListElement>
           <StyledLink to="/products">
-            <BiFoodMenu /> <p>Products</p>
+            <BiFoodMenu /> <p>Produkter</p>
           </StyledLink>
         </StyledListElement>
         <StyledListElement>
           <StyledLink to="/profile">
-            <CgProfile /> Profile
+            <CgProfile /> <p>Profil</p>
           </StyledLink>
         </StyledListElement>
         <StyledListElement>
           <StyledLink to="/cart">
             <AiOutlineShoppingCart />
-            Cart {cartTotal}kr
+            <p>{cartTotal}kr</p>
           </StyledLink>
         </StyledListElement>
       </LinkWrapper>
@@ -39,18 +39,18 @@ const BottomNavigationBar = ({ className }: Props) => {
 };
 
 const LinkWrapper = styled.ol`
-  padding: 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
+  height: inherit;
 `;
 
 const StyledListElement = styled.li`
   list-style: none;
+  align-self: center;
   a {
     text-decoration: none;
     color: #ffffff;
-    align: center;
   }
 `;
 
@@ -62,9 +62,9 @@ const StyledLink = styled(Link)`
 `;
 
 export default styled(BottomNavigationBar)`
+  display: flex;
+  flex-direction: column;
   background-color: ${OnlineBlue};
-  padding: 10px 0;
-  position: fixed;
-  bottom: 0;
   width: 100vw;
+  height: 100%;
 `;

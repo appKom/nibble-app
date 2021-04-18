@@ -1,9 +1,9 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import BottomNavigationBar from "components/BottomNavigationBar";
 import inventoryState from "state/inventory";
 import { Product } from "./Product";
+import Page from "components/Page";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,14 +16,13 @@ const Wrapper = styled.div`
 const Products = () => {
   const [inventory] = useRecoilState(inventoryState);
   return (
-    <div>
+    <Page>
       <Wrapper>
         {inventory?.map((product) => (
           <Product product={product} key={product.pk} />
         ))}
       </Wrapper>
-      <BottomNavigationBar />
-    </div>
+    </Page>
   );
 };
 
