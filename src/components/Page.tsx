@@ -5,7 +5,7 @@ import BottomNavigationBar from "./BottomNavigationBar";
 const Page: FC = (props) => {
   const { children } = props;
   return (
-    <Grid height="100vh" templateRows="10fr 1fr">
+    <Grid height="100vh" templateRows="10fr 1fr" bg="gray.200">
       <GridItem p="0.5rem" overflow="scroll">
         {children}
       </GridItem>
