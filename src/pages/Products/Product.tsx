@@ -1,7 +1,5 @@
 import { IMAGE_URI } from "api";
-import React from "react";
-import { useRecoilState } from "recoil";
-import cartState, { addCartItem } from "state/cart";
+import { useAddCartItem } from "state/cart";
 import styled from "styled-components";
 import { Product as ProductType } from "types/inventory";
 
@@ -35,18 +33,20 @@ const Description = styled.p`
   text-align: left;
   font-weight: 200;
 `;
+
 type Props = {
   product: ProductType;
 };
+
 export const Product = (props: Props) => {
-  const [cart, setCart] = useRecoilState(cartState);
+  const addCartItem = useAddCartItem();
   const { product } = props;
   const imageSrc = product.image
     ? IMAGE_URI(product.image.sm)
     : `${process.env.PUBLIC_URL}/images/noImage.png`;
   const cartItem = { name: product.name, price: product.price, quantity: 1 };
   return (
-    <Wrapper onClick={() => setCart(addCartItem(cart, cartItem))}>
+    <Wrapper onClick={() => addCartItem(cartItem)}>
       <Image src={imageSrc}></Image>
       <TextWrapper>
         <Name>{product.name}</Name>

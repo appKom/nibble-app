@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 
 const Products = () => {
   const [inventory] = useRecoilState(inventoryState);
+  if (!inventory) return null;
   return (
     <div>
       <Wrapper>
