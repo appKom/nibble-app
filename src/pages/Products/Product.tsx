@@ -4,19 +4,20 @@ import { useRecoilState } from "recoil";
 import cartState, { addCartItem } from "state/cart";
 import styled from "styled-components";
 import { Product as ProductType } from "types/inventory";
+import { Box } from "@chakra-ui/react";
 
 const Wrapper = styled.div`
-  width: 40%;
   border-radius: 5px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   text-align: center;
   background: #fff;
-  padding: 8px;
+  padding: 3px;
+  box-sizing: content-box;
 `;
 
 const Image = styled.img`
   width: 80%;
-  margin-bottom: 10px;
+  margin: auto;
 `;
 
 const Name = styled.p`
@@ -28,16 +29,17 @@ const Price = styled.p``;
 const TextWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
 `;
 
 const Description = styled.p`
   text-align: left;
   font-weight: 200;
 `;
+
 type Props = {
   product: ProductType;
 };
+
 export const Product = (props: Props) => {
   const [cart, setCart] = useRecoilState(cartState);
   const { product } = props;
@@ -52,7 +54,7 @@ export const Product = (props: Props) => {
         <Name>{product.name}</Name>
         <Price>{product.price}kr</Price>
       </TextWrapper>
-      <Description>{product.description}</Description>
+      {product.description && <Description>{product.description}</Description>}
     </Wrapper>
   );
 };

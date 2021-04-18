@@ -1,27 +1,19 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
 import inventoryState from "state/inventory";
 import { Product } from "./Product";
 import Page from "components/Page";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 20px;
-`;
+import { SimpleGrid } from "@chakra-ui/react";
 
 const Products = () => {
   const [inventory] = useRecoilState(inventoryState);
   return (
     <Page>
-      <Wrapper>
+      <SimpleGrid columns={2} gap="1rem">
         {inventory?.map((product) => (
           <Product product={product} key={product.pk} />
         ))}
-      </Wrapper>
+      </SimpleGrid>
     </Page>
   );
 };
