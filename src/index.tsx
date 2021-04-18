@@ -5,18 +5,22 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "chakra";
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <Router>
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <App />
-        </Switch>
-      </Router>
+      <ChakraProvider theme={theme}>
+        <Router>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <App />
+          </Switch>
+        </Router>
+      </ChakraProvider>
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")
