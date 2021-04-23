@@ -4,7 +4,6 @@ import { useRecoilState } from "recoil";
 import cartState, { addCartItem } from "state/cart";
 import styled from "styled-components";
 import { Product as ProductType } from "types/inventory";
-import { Box } from "@chakra-ui/react";
 
 const Wrapper = styled.div`
   border-radius: 5px;
