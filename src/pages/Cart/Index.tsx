@@ -1,33 +1,35 @@
-import BottomNavigationBar from "components/BottomNavigationBar";
-import React from "react";
 import { useRecoilState } from "recoil";
-import cartState, {
-  useGetCartTotal
-} from "state/cart";
-//import styled from "styled-components";
+import cartState, { useGetCartTotal } from "state/cart";
 import CartItem from "./Item";
+import { Button } from "@chakra-ui/react";
+import { Grid, Flex, GridItem } from "@chakra-ui/layout";
+import Page from "components/Page";
 
 const Cart = () => {
-  // const [cart] = useRecoilState(cartState);
   const cartTotal = useGetCartTotal();
   const [cart] = useRecoilState(cartState);
-  //const pk = { name: "Powerking", price: 10, quantity: 1 };
   console.log(cart);
-  const buy = () => {
-    console.log("kjøpt")
-  }
+  const purchase = () => {
+    console.log("kjøpt");
+  };
   return (
-    <div>
-      {cart.map((item) => (
-        <CartItem cartItem={item}  key={item.name}/>
-      ))}
-      <p>Total: {cartTotal}kr</p>
-      {/* Pluss og minus burde kanskje bare vises ved siden av et produkt i cart hvis det finnes noe */}
-      <button onClick={buy}>Kjøp</button>
-      <BottomNavigationBar />
-    </div>
+    <Page>
+      <Grid templateRows="10fr 1fr 1fr" h="100%">
+        <GridItem>
+          {cart.map((item) => (
+            <CartItem cartItem={item} key={item.name} />
+          ))}
+        </GridItem>
+        <Flex justifyContent="space-between">
+          <p>Total Sum:</p>
+          <p>{cartTotal}kr</p>
+        </Flex>
+        <Button w="100%" onClick={purchase}>
+          Kjøp
+        </Button>
+      </Grid>
+    </Page>
   );
 };
 
 export default Cart;
-

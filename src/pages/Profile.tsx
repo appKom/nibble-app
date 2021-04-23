@@ -1,11 +1,10 @@
-import BottomNavigationBar from "components/BottomNavigationBar";
+import Page from "components/Page";
 
 const Profile = () => {
   return (
-    <div>
+    <Page>
       <p>Profile</p>
-      <BottomNavigationBar />
-    </div>
+    </Page>
   );
 };
 
