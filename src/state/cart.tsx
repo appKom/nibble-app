@@ -21,6 +21,7 @@ export const addCartItem = (cart: CartItem[], cartItem: CartItem) => {
   if (cartItemIndex === -1) {
     return [...cart, cartItem];
   }
+
   const mutatedCartItem = {
     ...cartItem,
     quantity: cart[cartItemIndex].quantity + 1,

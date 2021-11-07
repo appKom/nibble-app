@@ -17,11 +17,11 @@ const Cart = () => {
       <Grid templateRows="10fr 1fr 1fr" h="100%">
         <GridItem>
           {cart.map((item) => (
-            <CartItem cartItem={item} key={item.name} />
+            <CartItem cartItem={item} key={item.name}  />
           ))}
         </GridItem>
         <Flex justifyContent="space-between">
-          <p>Total Sum:</p>
+          <p>Total Sum: </p>
           <p>{cartTotal}kr</p>
         </Flex>
         <Button w="100%" onClick={purchase}>
