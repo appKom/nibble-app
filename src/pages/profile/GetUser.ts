@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useUser } from "state/auth";
+import { useEffect, useState } from 'react';
+import { useUser } from 'state/auth';
 
 /*
 -----------------------------------------------------
@@ -26,12 +26,14 @@ const GetUser = (url: string) => {
       await fetch(url, {
         headers: {
           Authorization: `Bearer ${user?.access_token}`,
-          "Content-Type": "application/json",
-        }
+          'Content-Type': 'application/json',
+        },
       })
         .then((res) => {
           if (!res.ok) {
-            throw Error("Could not fetch the data for this resource.");
+            throw Error(
+              'Could not fetch the data for this resource.',
+            );
           }
           return res.json();
         })
