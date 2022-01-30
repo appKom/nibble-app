@@ -47,10 +47,6 @@ const CartItem = (props: CartItemProps) => {
             Slett
           </SmallCloseIcon>
         </Stack>
-
-        {/* <button onClick={() => setCart(reduceCartItem(cart, props.cartItem))}>-</button>
-        <button onClick={() => setCart(addCartItem(cart, props.cartItem))}>+</button>
-        <button onClick={() => setCart(deleteCartItem(cart, props.cartItem))}>Slett</button> */}
       </CartItemContainer>
     </div>
   );
