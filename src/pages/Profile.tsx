@@ -1,36 +1,45 @@
-import { Button, Heading, Stack } from "@chakra-ui/react";
-import { Image } from '@chakra-ui/react'
-import Page from "components/Page";
-import { useUser } from "state/auth";
-import userManager from "utils/oidc";
-import GetUser from "./profile/GetUser";
+import { Box, Button, Heading } from '@chakra-ui/react';
+import Page from 'components/Page';
+import { Redirect } from 'react-router-dom';
+import { useUser } from 'state/auth';
+import userManager from 'utils/oidc';
+import GetUser from './profile/GetUser';
 
 const Profile = () => {
   const user = useUser();
-  const { data } = GetUser(`${process.env.REACT_APP_API_BASE}/profile/`);
+  const { data } = GetUser(
+    `${process.env.REACT_APP_API_BASE}/profile/`,
+  );
   const signoutRedirect = () => userManager.signoutRedirect();
+
   return (
     <Page>
-      <Stack spacing={6} align={"center"}>
-        <Image
-          borderRadius='full'
-          boxSize='150px'
-          src={data.image}
-          alt={user?.profile.name}
-        />
-        <Heading as='h3' borderTop={"200px"}>
-          {user?.profile.name}
-        </Heading>
-        <Heading as='h3'>
-          Din saldo: {data.saldo} kr
-        </Heading>
-        <Button w="100%" onClick={() => console.log("Fyll på mer penger")}>
-          Fyll på mer penger
-        </Button>
-        <Button w="100%" onClick={signoutRedirect}>
-          Logg ut
-        </Button>
-      </Stack>
+      <Box
+        w="100%"
+        h="95%"
+        align={'center'}
+        display={'flex'}
+        justifyContent={'space-between'}
+        flexDirection={'column'}
+      >
+        <Box>
+          <Heading as="h3" size="xl" padding={5}>
+            {user?.profile.name}
+          </Heading>
+          <Heading as="h3" size="md">
+            Din saldo: {data.saldo} kr
+          </Heading>
+        </Box>
+        <Box>
+          <Button w="100%" onClick={() => console.log('TODO')}>
+            Fyll på mer penger
+          </Button>
+          <Box paddingTop={4}></Box>
+          <Button w="100%" onClick={signoutRedirect}>
+            Logg ut
+          </Button>
+        </Box>
+      </Box>
     </Page>
   );
 };
