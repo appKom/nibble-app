@@ -17,42 +17,41 @@ export const useGetCartTotal = () => {
 };
 
 export const addCartItem = (cart: CartItem[], cartItem: CartItem) => {
-  const cartItemIndex = cart.findIndex((item) => item.name === cartItem.name);
-  if (cartItemIndex === -1) {
-    return [...cart, cartItem];
+  const exist = cart.find((item) => item.name === cartItem.name);
+  if (exist) {
+    return cart.map((item) =>
+      item.name === cartItem.name
+        ? { ...exist, quantity: exist.quantity + 1 }
+        : item
+    );
+  } else {
+    return [...cart, { ...cartItem, quantity: 1 }];
   }
-
-  const mutatedCartItem = {
-    ...cartItem,
-    quantity: cart[cartItemIndex].quantity + 1,
-  };
-  const filteredCart = cart.filter((item) => item.name !== cartItem.name);
-  return [...filteredCart, mutatedCartItem];
 };
 
 export const reduceCartItem = (cart: CartItem[], cartItem: CartItem) => {
-  const cartItemIndex = cart.findIndex((item) => item.name === cartItem.name);
-  if (cartItemIndex === -1) {
-    return [...cart, cartItem];
+  const exist = cart.find((item) => item.name === cartItem.name);
+  if (exist) {
+    if (exist.quantity === 1) {
+      return deleteCartItem(cart, cartItem);
+    } else {
+      return cart.map((item) =>
+        item.name === cartItem.name
+          ? { ...exist, quantity: exist.quantity - 1 }
+          : item
+      );
+    }
+  } else {
+    return [...cart];
   }
-
-  const mutatedCartItem = {
-    ...cartItem,
-    quantity: cart[cartItemIndex].quantity - 1,
-  };
-
-  if (mutatedCartItem.quantity <= 0) {
-    // Noe bedre måte å bruke deleteCartItem?
-    const filteredCart = cart.filter((item) => item.name !== cartItem.name);
-    return [...filteredCart];
-  }
-  const filteredCart = cart.filter((item) => item.name !== cartItem.name);
-  return [...filteredCart, mutatedCartItem];
 };
 
 export const deleteCartItem = (cart: CartItem[], cartItem: CartItem) => {
-  const filteredCart = cart.filter((item) => item.name !== cartItem.name);
-  return [...filteredCart];
+  return cart.filter((item) => item.name !== cartItem.name);
+};
+
+export const emptyCart = (cart: CartItem[]) => {
+  return cart.filter((item) => !item);
 };
 
 export default cartState;

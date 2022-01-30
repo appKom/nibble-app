@@ -1,8 +1,13 @@
 import { useRecoilState } from "recoil";
-import cartState, { CartItem as CartItemType, reduceCartItem, addCartItem, deleteCartItem } from "state/cart";
+import cartState, {
+  CartItem as CartItemType,
+  reduceCartItem,
+  addCartItem,
+  deleteCartItem,
+} from "state/cart";
 import styled from "styled-components";
-import { Button } from "@chakra-ui/react"; 
-import { SmallCloseIcon, AddIcon, MinusIcon} from "@chakra-ui/icons";
+import { Button } from "@chakra-ui/react";
+import { SmallCloseIcon } from "@chakra-ui/icons";
 
 type CartItemProps = { cartItem: CartItemType };
 const CartItem = (props: CartItemProps) => {
@@ -17,23 +22,31 @@ const CartItem = (props: CartItemProps) => {
         <p>Antall: {props.cartItem.quantity}</p>
 
         <Stack>
-         <div> 
-          
-          <Button fontSize="12px" size="xs" onClick={() => setCart(reduceCartItem(cart, props.cartItem)) }>
-          -
-          </Button>
+          <div>
+            <Button
+              fontSize="12px"
+              size="xs"
+              onClick={() => setCart(reduceCartItem(cart, props.cartItem))}
+            >
+              -
+            </Button>
 
-          <Button fontSize="12px" size="xs" onClick={() => setCart(addCartItem(cart, props.cartItem)) }>
-          +
-  </Button>
-          </div> 
-     
+            <Button
+              fontSize="12px"
+              size="xs"
+              onClick={() => setCart(addCartItem(cart, props.cartItem))}
+            >
+              +
+            </Button>
+          </div>
 
-          <SmallCloseIcon color = "red" onClick={() => setCart(deleteCartItem(cart, props.cartItem)) }>
-          Slett
+          <SmallCloseIcon
+            color="red"
+            onClick={() => setCart(deleteCartItem(cart, props.cartItem))}
+          >
+            Slett
           </SmallCloseIcon>
         </Stack>
-
 
         {/* <button onClick={() => setCart(reduceCartItem(cart, props.cartItem))}>-</button>
         <button onClick={() => setCart(addCartItem(cart, props.cartItem))}>+</button>
@@ -45,21 +58,19 @@ const CartItem = (props: CartItemProps) => {
 
 const CartItemHeader = styled.div`
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
 `;
 
 const CartItemContainer = styled.div`
   margin-bottom: 15px;
   padding: 10px;
   box-shadow: 2px 2px 7px #888888;
-  border-radius: 7px; 
+  border-radius: 7px;
 `;
 
 const Stack = styled.div`
-  display: flex; 
-  justify-content: space-between; 
+  display: flex;
+  justify-content: space-between;
 `;
-
-
 
 export default CartItem;
