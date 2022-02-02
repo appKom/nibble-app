@@ -1,14 +1,14 @@
-import { loadToken } from "api/token";
-import { Product } from "types/inventory";
+import { loadToken } from 'api/token';
+import { Product } from 'types/inventory';
 
 export const CLIENT_ID = encodeURIComponent(
-  process.env.REACT_APP_CLIENT_ID || ""
+  process.env.REACT_APP_CLIENT_ID || '',
 );
 export const CLIENT_SECRET = encodeURIComponent(
-  process.env.REACT_APP_CLIENT_SECRET || ""
+  process.env.REACT_APP_CLIENT_SECRET || '',
 );
 
-const API_BASE = process.env.REACT_APP_API_BASE || "";
+const API_BASE = process.env.REACT_APP_API_BASE || '';
 export const AUTHORIZE_URI = `${API_BASE}/auth/`;
 export const REGISTER_RFID_URI = `${API_BASE}/rfid/`;
 export const INVENTORY_URI = `${process.env.REACT_APP_API_BASE}/inventory/`;
@@ -16,7 +16,7 @@ export const BALANCE_URI = `${process.env.REACT_APP_API_BASE}/transactions/`; //
 export const TRANSACTION_URI = `${process.env.REACT_APP_API_BASE}/orderline/`; // purchase item
 export const LOGIN_URI = (rfid: string): string =>
   `${API_BASE}/usersaldo/?rfid=${rfid}`;
-export const IMAGE_URI = (sm: string): string => `https://online.ntnu.no/${sm}`;
+export const IMAGE_URI = (sm: string): string => `${sm}`;
 
 type AJAXArguments = {
   url: string;
@@ -24,9 +24,13 @@ type AJAXArguments = {
   headers?: HeadersInit;
 };
 
-export const get = ({ url, body, headers }: AJAXArguments): Promise<Response> =>
+export const get = ({
+  url,
+  body,
+  headers,
+}: AJAXArguments): Promise<Response> =>
   fetch(url, {
-    method: "GET",
+    method: 'GET',
     body: JSON.stringify(body),
     headers: headers,
   });
@@ -42,7 +46,7 @@ export const authorizedGet = ({
     headers: {
       ...headers,
       Authorization: `Bearer ${loadToken()}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 
@@ -52,8 +56,8 @@ export const post = ({
   headers,
 }: AJAXArguments): Promise<Response> =>
   fetch(url, {
-    method: "POST",
-    body: typeof body === "string" ? body : JSON.stringify(body),
+    method: 'POST',
+    body: typeof body === 'string' ? body : JSON.stringify(body),
     headers,
   });
 
@@ -67,12 +71,14 @@ export const authorizedPost = ({
     body,
     headers: {
       ...headers,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${loadToken()}`,
     },
   });
 
-export const fetchInventory = async (url: string): Promise<Product[]> => {
+export const fetchInventory = async (
+  url: string,
+): Promise<Product[]> => {
   const response = await get({ url });
   if (response.ok) {
     const json = await response.json();

@@ -11,7 +11,7 @@ const userManager = new UserManager({
   authority,
   redirect_uri,
   response_type: "code",
-  scope: "openid onlineweb4",
+  scope: "openid onlineweb4 profile",
 });
 
 export default userManager;
