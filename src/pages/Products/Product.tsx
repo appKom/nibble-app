@@ -28,6 +28,7 @@ const Price = styled.p``;
 const TextWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  text-align: left;
 `;
 
 const Description = styled.p`
