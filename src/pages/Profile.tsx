@@ -1,16 +1,20 @@
 import { Box, Button, Heading } from '@chakra-ui/react';
 import Page from 'components/Page';
-import { Redirect } from 'react-router-dom';
 import { useUser } from 'state/auth';
 import userManager from 'utils/oidc';
 import GetUser from './profile/GetUser';
 
 const Profile = () => {
   const user = useUser();
-  const { data } = GetUser(
+  const { data, error } = GetUser(
     `${process.env.REACT_APP_API_BASE}/profile/`,
   );
-  const signoutRedirect = () => userManager.signoutRedirect();
+
+  const signout = () => {
+    userManager.removeUser();
+    userManager.revokeAccessToken();
+    window.location.reload();
+  };
 
   return (
     <Page>
@@ -26,16 +30,22 @@ const Profile = () => {
           <Heading as="h3" size="xl" padding={5}>
             {user?.profile.name}
           </Heading>
-          <Heading as="h3" size="md">
-            Din saldo: {data.saldo} kr
-          </Heading>
+          {!error ? (
+            <Heading as="h3" size="md">
+              Din saldo: {data.saldo} kr
+            </Heading>
+          ) : (
+            <Heading as="h3" size="sm">
+              En feil oppsto, kunne ikke finne saldoen din :/
+            </Heading>
+          )}
         </Box>
         <Box>
           <Button w="100%" onClick={() => console.log('TODO')}>
             Fyll på mer penger
           </Button>
           <Box paddingTop={4}></Box>
-          <Button w="100%" onClick={signoutRedirect}>
+          <Button w="100%" onClick={signout}>
             Logg ut
           </Button>
         </Box>
