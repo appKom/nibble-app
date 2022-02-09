@@ -16,6 +16,10 @@ const Profile = () => {
     window.location.reload();
   };
 
+  const addMoney = () => {
+    window.open('https://online.ntnu.no/payments/wallet', '_blank');
+  };
+
   return (
     <Page>
       <Box
@@ -41,7 +45,7 @@ const Profile = () => {
           )}
         </Box>
         <Box>
-          <Button w="100%" onClick={() => console.log('TODO')}>
+          <Button w="100%" onClick={addMoney}>
             Fyll på mer penger
           </Button>
           <Box paddingTop={4}></Box>
