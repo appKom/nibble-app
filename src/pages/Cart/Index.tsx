@@ -1,6 +1,6 @@
-import { useRecoilState } from "recoil";
-import cartState, { emptyCart, useGetCartTotal } from "state/cart";
-import CartItem from "./Item";
+import { useRecoilState } from 'recoil';
+import cartState, { emptyCart, useGetCartTotal } from 'state/cart';
+import CartItem from './Item';
 import {
   Button,
   Modal,
@@ -11,10 +11,10 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-} from "@chakra-ui/react";
-import { Grid, Flex, GridItem } from "@chakra-ui/layout";
-import Page from "components/Page";
-import styled from "styled-components";
+} from '@chakra-ui/react';
+import { Grid, Flex, GridItem, Center } from '@chakra-ui/layout';
+import Page from 'components/Page';
+import styled from 'styled-components';
 
 const Cart = () => {
   const cartTotal = useGetCartTotal();
@@ -22,49 +22,75 @@ const Cart = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   function confirmation() {
-    setCart(emptyCart(cart));
+    emptyTheCart();
     onClose();
+  }
+
+  function emptyTheCart() {
+    setCart(emptyCart(cart));
   }
 
   return (
     <Page>
-      <Grid templateRows="10fr 1fr 1fr" h="100%">
-        <GridItem>
-          {cart.map((item) => (
-            <CartItem cartItem={item} key={item.name} />
-          ))}
-        </GridItem>
-        <Flex justifyContent="space-between">
-          <p>Total Sum: </p>
-          <p>{cartTotal}kr</p>
-        </Flex>
-
-        <Button w="100%" onClick={onOpen}>
-          Kjøp
-        </Button>
-      </Grid>
-
-      <Modal isOpen={isOpen} onClose={onClose} size="xs" isCentered>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Bekreft</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Total>
-              <p>
-                <strong>Total sum:</strong>
-              </p>
+      {cart.length > 0 ? (
+        <>
+          <Grid templateRows="10fr 1fr 1fr" h="100%">
+            <GridItem>
+              {cart.map((item) => (
+                <CartItem cartItem={item} key={item.name} />
+              ))}
+            </GridItem>
+            <Flex justifyContent="space-between">
+              <p>Total Sum: </p>
               <p>{cartTotal}kr</p>
-            </Total>
-          </ModalBody>
+            </Flex>
 
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={confirmation}>
-              Kjøp
+            <Button
+              variant="outline"
+              colorScheme="blue"
+              onClick={emptyTheCart}
+            >
+              Tøm
             </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+            <Button onClick={onOpen}>Kjøp</Button>
+          </Grid>
+
+          <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            size="xs"
+            isCentered
+          >
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Bekreft</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Total>
+                  <p>
+                    <strong>Total sum:</strong>
+                  </p>
+                  <p>{cartTotal}kr</p>
+                </Total>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button
+                  colorScheme="blue"
+                  mr={3}
+                  onClick={confirmation}
+                >
+                  Kjøp
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </>
+      ) : (
+        <Center height="100%">
+          Handlekurven din er tom. <br /> Legg til noen produkter.
+        </Center>
+      )}
     </Page>
   );
 };
