@@ -1,12 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useGetCartTotal } from "state/cart";
-import styled from "styled-components";
-import { OnlineBlue } from "utils/colors";
-import { BiFoodMenu } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
-import { AiOutlineShoppingCart } from "react-icons/ai";
-import { Box } from "@chakra-ui/react";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useGetCartTotal } from 'state/cart';
+import styled from 'styled-components';
+import { OnlineBlue } from 'utils/colors';
+import { BiFoodMenu } from 'react-icons/bi';
+import { CgProfile } from 'react-icons/cg';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { Box } from '@chakra-ui/react';
 
 type Props = {
   className?: string;

@@ -1,13 +1,14 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState } from 'recoil';
 import cartState, {
   CartItem as CartItemType,
   reduceCartItem,
   addCartItem,
   deleteCartItem,
-} from "state/cart";
-import styled from "styled-components";
-import { Button } from "@chakra-ui/react";
-import { SmallCloseIcon } from "@chakra-ui/icons";
+} from 'state/cart';
+import styled from 'styled-components';
+import { Button, Flex, Heading } from '@chakra-ui/react';
+import { CloseIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { Stack, HStack, VStack } from '@chakra-ui/react';
 
 type CartItemProps = { cartItem: CartItemType };
 const CartItem = (props: CartItemProps) => {
@@ -16,36 +17,50 @@ const CartItem = (props: CartItemProps) => {
     <div>
       <CartItemContainer>
         <CartItemHeader>
-          <p>{props.cartItem.name}</p>
+          <Heading as="h3" size="sm">
+            {props.cartItem.name}
+          </Heading>
           <p>{props.cartItem.price}kr</p>
         </CartItemHeader>
-        <p>Antall: {props.cartItem.quantity}</p>
+        <p>
+          Antall: <b>{props.cartItem.quantity}</b>
+        </p>
+        <br />
 
-        <Stack>
+        <Stack
+          spacing={4}
+          direction="row"
+          align="center"
+          display={'flex'}
+          justifyContent={'space-between'}
+        >
           <div>
             <Button
-              fontSize="12px"
-              size="xs"
-              onClick={() => setCart(reduceCartItem(cart, props.cartItem))}
+              size="sm"
+              onClick={() =>
+                setCart(reduceCartItem(cart, props.cartItem))
+              }
             >
               -
             </Button>
-
+            {'        '}
             <Button
-              fontSize="12px"
-              size="xs"
-              onClick={() => setCart(addCartItem(cart, props.cartItem))}
+              size="sm"
+              onClick={() =>
+                setCart(addCartItem(cart, props.cartItem))
+              }
             >
               +
             </Button>
           </div>
-
-          <SmallCloseIcon
+          <CloseIcon
             color="red"
-            onClick={() => setCart(deleteCartItem(cart, props.cartItem))}
+            onClick={() =>
+              setCart(deleteCartItem(cart, props.cartItem))
+            }
           >
             Slett
-          </SmallCloseIcon>
+          </CloseIcon>
         </Stack>
       </CartItemContainer>
     </div>
@@ -62,11 +77,7 @@ const CartItemContainer = styled.div`
   padding: 10px;
   box-shadow: 2px 2px 7px #888888;
   border-radius: 7px;
-`;
-
-const Stack = styled.div`
-  display: flex;
-  justify-content: space-between;
+  background-color: #fff;
 `;
 
 export default CartItem;
