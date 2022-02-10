@@ -12,7 +12,13 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
-import { Grid, Flex, GridItem, Center } from '@chakra-ui/layout';
+import {
+  Grid,
+  Flex,
+  GridItem,
+  Center,
+  Heading,
+} from '@chakra-ui/layout';
 import Page from 'components/Page';
 import styled from 'styled-components';
 
@@ -34,15 +40,19 @@ const Cart = () => {
     <Page>
       {cart.length > 0 ? (
         <>
-          <Grid templateRows="10fr 1fr 1fr" h="100%">
+          <Grid templateRows="10fr 1fr 1fr" h="95%">
             <GridItem>
               {cart.map((item) => (
                 <CartItem cartItem={item} key={item.name} />
               ))}
             </GridItem>
             <Flex justifyContent="space-between">
-              <p>Total Sum: </p>
-              <p>{cartTotal}kr</p>
+              <p>
+                <strong>Total Sum: </strong>
+              </p>
+              <p>
+                <strong>{cartTotal}kr</strong>
+              </p>
             </Flex>
 
             <Button
@@ -50,7 +60,7 @@ const Cart = () => {
               colorScheme="blue"
               onClick={emptyTheCart}
             >
-              Tøm
+              Tøm handlekurv
             </Button>
             <Button onClick={onOpen}>Kjøp</Button>
           </Grid>
@@ -87,8 +97,10 @@ const Cart = () => {
           </Modal>
         </>
       ) : (
-        <Center height="100%">
-          Handlekurven din er tom. <br /> Legg til noen produkter.
+        <Center height="100%" align={'center'}>
+          <Heading as="h3" size="md">
+            Handlekurven din er tom. <br /> Legg til noen produkter.
+          </Heading>
         </Center>
       )}
     </Page>
