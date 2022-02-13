@@ -18,23 +18,31 @@ import {
   GridItem,
   Center,
   Heading,
+  Text,
 } from '@chakra-ui/layout';
 import Page from 'components/Page';
 import styled from 'styled-components';
+
+import QrReader from 'react-qr-reader';
 
 const Cart = () => {
   const cartTotal = useGetCartTotal();
   const [cart, setCart] = useRecoilState(cartState);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  function confirmation() {
-    emptyTheCart();
-    onClose();
-  }
-
   function emptyTheCart() {
     setCart(emptyCart(cart));
   }
+
+  const handleScan = (data: any) => {
+    console.log(data);
+
+    // emptyTheCart();
+    // onClose();
+  };
+  const handleError = (err: any) => {
+    console.error(err);
+  };
 
   return (
     <Page>
@@ -73,26 +81,27 @@ const Cart = () => {
           >
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Bekreft</ModalHeader>
+              <ModalHeader></ModalHeader>
               <ModalCloseButton />
+              <Total>
+                <Heading as="h3" size="md">
+                  Total sum: {cartTotal}kr
+                </Heading>
+                <br />
+                <Text fontSize="lg">
+                  Skan QR koden på Nibble skjermen for å fullføre kjøp
+                </Text>
+              </Total>
               <ModalBody>
-                <Total>
-                  <p>
-                    <strong>Total sum:</strong>
-                  </p>
-                  <p>{cartTotal}kr</p>
-                </Total>
+                <QrReader
+                  delay={300}
+                  onError={handleError}
+                  onScan={handleScan}
+                  style={{ width: '100%' }}
+                />
               </ModalBody>
 
-              <ModalFooter>
-                <Button
-                  colorScheme="blue"
-                  mr={3}
-                  onClick={confirmation}
-                >
-                  Kjøp
-                </Button>
-              </ModalFooter>
+              <ModalFooter></ModalFooter>
             </ModalContent>
           </Modal>
         </>
@@ -110,10 +119,9 @@ const Cart = () => {
 const Total = styled.div`
   justify-content: center;
   text-align: center;
-  background-color: #f7f7fb;
   border-radius: 3px;
   margin: auto;
-  width: 10em;
+  width: 100%;
   padding: 20px;
 `;
 
