@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 const HeaderText = styled.div`
   width: 100%;
   position: fixed;
-  top: 20%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 18px;

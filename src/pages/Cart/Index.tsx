@@ -24,24 +24,49 @@ import Page from 'components/Page';
 import styled from 'styled-components';
 
 import QrReader from 'react-qr-reader';
+import { useState } from 'react';
 
 const Cart = () => {
   const cartTotal = useGetCartTotal();
   const [cart, setCart] = useRecoilState(cartState);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [confirmation, setConfirmation] = useState(false);
+  const {
+    isOpen: isQROpen,
+    onOpen: onQROpen,
+    onClose: onQRClose,
+  } = useDisclosure();
+  const {
+    isOpen: isBuyOpen,
+    onOpen: onBuyOpen,
+    onClose: onBuyClose,
+  } = useDisclosure();
 
   function emptyTheCart() {
     setCart(emptyCart(cart));
   }
 
-  const handleScan = (data: any) => {
-    console.log(data);
-
-    // emptyTheCart();
-    // onClose();
+  const buyItems = () => {
+    console.log('KJØPT!');
+    setConfirmation(true);
+    onBuyOpen();
   };
+
+  const handleScan = (data: string | null) => {
+    //http://en.m.wikipedia.org
+    // NibbleConfirmationText
+
+    if (data?.match('http://en.m.wikipedia.org')) {
+      // TODO
+      // Implement buy logic
+      buyItems();
+
+      emptyTheCart();
+      onQRClose();
+    }
+  };
+
   const handleError = (err: any) => {
-    console.error(err);
+    console.log(err);
   };
 
   return (
@@ -62,7 +87,6 @@ const Cart = () => {
                 <strong>{cartTotal}kr</strong>
               </p>
             </Flex>
-
             <Button
               variant="outline"
               colorScheme="blue"
@@ -70,12 +94,12 @@ const Cart = () => {
             >
               Tøm handlekurv
             </Button>
-            <Button onClick={onOpen}>Kjøp</Button>
+            <Button onClick={onQROpen}>Kjøp</Button>
           </Grid>
 
           <Modal
-            isOpen={isOpen}
-            onClose={onClose}
+            isOpen={isQROpen}
+            onClose={onQRClose}
             size="xs"
             isCentered
           >
@@ -104,6 +128,26 @@ const Cart = () => {
               <ModalFooter></ModalFooter>
             </ModalContent>
           </Modal>
+
+          <Modal
+            isOpen={isBuyOpen}
+            onClose={onBuyClose}
+            size="xs"
+            isCentered
+          >
+            <ModalOverlay />
+            <ModalContent backgroundColor={'green.400'}>
+              <ModalHeader></ModalHeader>
+              <ModalCloseButton />
+              <Total>
+                <Heading as="h3" size="md">
+                  Kjøp vellykket!! 🥳
+                </Heading>
+              </Total>
+              <ModalBody></ModalBody>
+              <ModalFooter></ModalFooter>
+            </ModalContent>
+          </Modal>
         </>
       ) : (
         <Center height="100%" align={'center'}>
@@ -111,6 +155,35 @@ const Cart = () => {
             Handlekurven din er tom. <br /> Legg til noen produkter.
           </Heading>
         </Center>
+      )}
+      {confirmation === true && (
+        <>
+          <Center height="100%" align={'center'}>
+            <Heading as="h3" size="md">
+              Handlekurven din er tom.
+              <br /> Legg til noen produkter.
+            </Heading>
+          </Center>
+          <Modal
+            isOpen={isBuyOpen}
+            onClose={onBuyClose}
+            size="xs"
+            isCentered
+          >
+            <ModalOverlay />
+            <ModalContent backgroundColor={'green.400'}>
+              <ModalHeader></ModalHeader>
+              <ModalCloseButton />
+              <Total>
+                <Heading as="h3" size="md">
+                  Kjøp vellykket!! 🥳
+                </Heading>
+              </Total>
+              <ModalBody></ModalBody>
+              <ModalFooter></ModalFooter>
+            </ModalContent>
+          </Modal>
+        </>
       )}
     </Page>
   );

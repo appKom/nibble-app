@@ -6,9 +6,9 @@ import cartState, {
   deleteCartItem,
 } from 'state/cart';
 import styled from 'styled-components';
-import { Button, Flex, Heading } from '@chakra-ui/react';
-import { CloseIcon, SmallCloseIcon } from '@chakra-ui/icons';
-import { Stack, HStack, VStack } from '@chakra-ui/react';
+import { Button, Heading } from '@chakra-ui/react';
+import { CloseIcon } from '@chakra-ui/icons';
+import { Stack } from '@chakra-ui/react';
 
 type CartItemProps = { cartItem: CartItemType };
 const CartItem = (props: CartItemProps) => {
