@@ -18,9 +18,12 @@ import {
   GridItem,
   Center,
   Heading,
+  SimpleGrid,
+  Box,
 } from '@chakra-ui/layout';
 import Page from 'components/Page';
 import styled from 'styled-components';
+import Item from './Item';
 
 const Cart = () => {
   const cartTotal = useGetCartTotal();
@@ -40,12 +43,15 @@ const Cart = () => {
     <Page>
       {cart.length > 0 ? (
         <>
-          <Grid templateRows="10fr 1fr 1fr" h="95%">
+          <Grid templateRows="10fr 1fr 1fr" h="70%">
             <GridItem>
               {cart.map((item) => (
-                <CartItem cartItem={item} key={item.name} />
+                <CartItem cartItem={item} key={item.name} /> 
               ))}
             </GridItem>
+            <GridItem><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></GridItem>
+          </Grid>
+          <SimpleGrid width="95%" height="27.8%" position={'fixed'} bg="white" marginBottom ="10%" borderRadius={5}>
             <Flex justifyContent="space-between">
               <p>
                 <strong>Total Sum: </strong>
@@ -55,15 +61,16 @@ const Cart = () => {
               </p>
             </Flex>
 
-            <Button
+            <Button width="100%"
               variant="outline"
               colorScheme="blue"
               onClick={emptyTheCart}
             >
               Tøm handlekurv
             </Button>
-            <Button onClick={onOpen}>Kjøp</Button>
-          </Grid>
+            <Button width="100%" onClick={onOpen}>Kjøp</Button>
+          </SimpleGrid>
+       
 
           <Modal
             isOpen={isOpen}
