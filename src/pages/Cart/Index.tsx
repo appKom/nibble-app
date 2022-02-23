@@ -49,9 +49,9 @@ const Cart = () => {
                 <CartItem cartItem={item} key={item.name} /> 
               ))}
             </GridItem>
-            <GridItem><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></GridItem>
+            <GridItem><br/><br/><br/><br/><br/><br/><br/><br/><br/></GridItem>
           </Grid>
-          <SimpleGrid width="95%" height="27.8%" position={'fixed'} bg="white" marginBottom ="10%" borderRadius={5}>
+          <SimpleGrid width="97%" height="27.8%" position={'fixed'} bg="white" borderRadius={5}>
             <Flex justifyContent="space-between">
               <p>
                 <strong>Total Sum: </strong>
