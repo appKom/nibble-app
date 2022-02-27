@@ -13,17 +13,13 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import {
-  Grid,
   Flex,
-  GridItem,
   Center,
   Heading,
   SimpleGrid,
-  Box,
 } from '@chakra-ui/layout';
 import Page from 'components/Page';
 import styled from 'styled-components';
-import Item from './Item';
 
 const Cart = () => {
   const cartTotal = useGetCartTotal();
@@ -43,12 +39,12 @@ const Cart = () => {
     <Page>
       {cart.length > 0 ? (
         <>
-          <SimpleGrid overflow="auto" h="70%">
+          <SimpleGrid overflow="auto" h="70%" templateRows='1fr 1fr 1fr 1fr' > 
               {cart.map((item) => (
                 <CartItem cartItem={item} key={item.name} /> 
               ))}
           </SimpleGrid>
-          <SimpleGrid width="95%" height="25%" position={'fixed'} bg="white" borderRadius={5}>
+          <SimpleGrid width="95%" height="25%" position={'fixed'} bg="white" borderRadius={5} padding={5} boxShadow={'2px 2px 7px #888888'}>
             <Flex justifyContent="space-between">
               <p>
                 <strong>Total Sum: </strong>
@@ -120,5 +116,7 @@ const Total = styled.div`
   width: 10em;
   padding: 20px;
 `;
+
+
 
 export default Cart;
