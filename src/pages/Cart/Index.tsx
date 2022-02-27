@@ -43,15 +43,12 @@ const Cart = () => {
     <Page>
       {cart.length > 0 ? (
         <>
-          <Grid templateRows="10fr 1fr 1fr" h="70%">
-            <GridItem>
+          <SimpleGrid overflow="auto" h="70%">
               {cart.map((item) => (
                 <CartItem cartItem={item} key={item.name} /> 
               ))}
-            </GridItem>
-            <GridItem><br/><br/><br/><br/><br/><br/><br/><br/><br/></GridItem>
-          </Grid>
-          <SimpleGrid width="97%" height="27.8%" position={'fixed'} bg="white" borderRadius={5}>
+          </SimpleGrid>
+          <SimpleGrid width="95%" height="25%" position={'fixed'} bg="white" borderRadius={5}>
             <Flex justifyContent="space-between">
               <p>
                 <strong>Total Sum: </strong>
