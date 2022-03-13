@@ -1,9 +1,14 @@
-import { atom, useRecoilState } from "recoil";
+import { atom, useRecoilState } from 'recoil';
 
-export type CartItem = { name: string; price: number; quantity: number };
+export type CartItem = {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+};
 
 const cartState = atom<CartItem[]>({
-  key: "cart",
+  key: 'cart',
   default: [],
 });
 
@@ -12,7 +17,7 @@ export const useGetCartTotal = () => {
   return cart.reduce(
     (previousValue, currentValue) =>
       previousValue + currentValue.price * currentValue.quantity,
-    0
+    0,
   );
 };
 
@@ -22,14 +27,17 @@ export const addCartItem = (cart: CartItem[], cartItem: CartItem) => {
     return cart.map((item) =>
       item.name === cartItem.name
         ? { ...exist, quantity: exist.quantity + 1 }
-        : item
+        : item,
     );
   } else {
     return [...cart, { ...cartItem, quantity: 1 }];
   }
 };
 
-export const reduceCartItem = (cart: CartItem[], cartItem: CartItem) => {
+export const reduceCartItem = (
+  cart: CartItem[],
+  cartItem: CartItem,
+) => {
   const exist = cart.find((item) => item.name === cartItem.name);
   if (exist) {
     if (exist.quantity === 1) {
@@ -38,7 +46,7 @@ export const reduceCartItem = (cart: CartItem[], cartItem: CartItem) => {
       return cart.map((item) =>
         item.name === cartItem.name
           ? { ...exist, quantity: exist.quantity - 1 }
-          : item
+          : item,
       );
     }
   } else {
@@ -46,7 +54,10 @@ export const reduceCartItem = (cart: CartItem[], cartItem: CartItem) => {
   }
 };
 
-export const deleteCartItem = (cart: CartItem[], cartItem: CartItem) => {
+export const deleteCartItem = (
+  cart: CartItem[],
+  cartItem: CartItem,
+) => {
   return cart.filter((item) => item.name !== cartItem.name);
 };
 

@@ -21,14 +21,17 @@ import {
 } from '@chakra-ui/layout';
 import Page from 'components/Page';
 import styled from 'styled-components';
-
 import QrReader from 'react-qr-reader';
 import { useState } from 'react';
+import purchaseItems from 'api/order';
+import { useUser } from 'state/auth';
+import { getToken } from 'api/token';
 
 const Cart = () => {
   const cartTotal = useGetCartTotal();
   const [cart, setCart] = useRecoilState(cartState);
   const [confirmation, setConfirmation] = useState(false);
+  const user = useUser();
   const {
     isOpen: isQROpen,
     onOpen: onQROpen,
@@ -40,12 +43,20 @@ const Cart = () => {
     onClose: onBuyClose,
   } = useDisclosure();
 
+  // blahh
+  const idTest: any = user?.profile.sub;
+  console.log('tets');
+  console.log(getToken());
+  console.log('tets');
+  // blah
+
   function emptyTheCart() {
     setCart(emptyCart(cart));
   }
 
   const buyItems = () => {
-    console.log('KJØPT!');
+    console.log('KJØPT?');
+    purchaseItems(idTest, cart);
     setConfirmation(true);
     onBuyOpen();
   };
@@ -54,6 +65,7 @@ const Cart = () => {
     if (data?.match('madeByAppkom<3')) {
       // TODO
       // Implement buy logic
+
       buyItems();
 
       emptyTheCart();

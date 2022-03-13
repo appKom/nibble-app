@@ -1,9 +1,14 @@
-import { AUTHORIZE_URI, CLIENT_ID, CLIENT_SECRET, post } from "api";
+import { AUTHORIZE_URI, CLIENT_ID, CLIENT_SECRET, post } from 'api';
+import { useUser } from 'state/auth';
 
 const saveToken = (token: string) =>
-  localStorage.setItem("nibble4_token", token);
+  localStorage.setItem('nibble4_token', token);
 export const loadToken = (): string =>
-  localStorage.getItem("nibble4_token") || "";
+  localStorage.getItem('nibble4_token') || '';
+
+export const getToken = (): string => {
+  return 'TODO';
+};
 
 export const fetchToken = async (): Promise<void> => {
   // Currently it returns 'unsuported grant_type' when using application/json. Should look into it.
@@ -12,7 +17,7 @@ export const fetchToken = async (): Promise<void> => {
     url: AUTHORIZE_URI,
     body: payload,
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
   const json = await response.json();

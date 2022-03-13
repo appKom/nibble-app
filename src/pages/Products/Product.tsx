@@ -1,9 +1,9 @@
-import { IMAGE_URI } from "api";
-import React from "react";
-import { useRecoilState } from "recoil";
-import cartState, { addCartItem } from "state/cart";
-import styled from "styled-components";
-import { Product as ProductType } from "types/inventory";
+import { IMAGE_URI } from 'api';
+import React from 'react';
+import { useRecoilState } from 'recoil';
+import cartState, { addCartItem } from 'state/cart';
+import styled from 'styled-components';
+import { Product as ProductType } from 'types/inventory';
 
 const Wrapper = styled.div`
   border-radius: 5px;
@@ -46,7 +46,12 @@ export const Product = (props: Props) => {
   const imageSrc = product.image
     ? IMAGE_URI(product.image.sm)
     : `${process.env.PUBLIC_URL}/images/noImage.png`;
-  const cartItem = { name: product.name, price: product.price, quantity: 1 };
+  const cartItem = {
+    id: product.pk,
+    name: product.name,
+    price: product.price,
+    quantity: 1,
+  };
   return (
     <Wrapper onClick={() => setCart(addCartItem(cart, cartItem))}>
       <Image src={imageSrc}></Image>
@@ -54,7 +59,9 @@ export const Product = (props: Props) => {
         <Name>{product.name}</Name>
         <Price>{product.price}kr</Price>
       </TextWrapper>
-      {product.description && <Description>{product.description}</Description>}
+      {product.description && (
+        <Description>{product.description}</Description>
+      )}
     </Wrapper>
   );
 };
