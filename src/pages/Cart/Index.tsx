@@ -13,12 +13,11 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import {
-  Grid,
   Flex,
-  GridItem,
   Center,
   Heading,
   Text,
+  SimpleGrid,
 } from '@chakra-ui/layout';
 import Page from 'components/Page';
 import styled from 'styled-components';
@@ -52,10 +51,7 @@ const Cart = () => {
   };
 
   const handleScan = (data: string | null) => {
-    //http://en.m.wikipedia.org
-    // NibbleConfirmationText
-
-    if (data?.match('http://en.m.wikipedia.org')) {
+    if (data?.match('madeByAppkom<3')) {
       // TODO
       // Implement buy logic
       buyItems();
@@ -73,12 +69,24 @@ const Cart = () => {
     <Page>
       {cart.length > 0 ? (
         <>
-          <Grid templateRows="10fr 1fr 1fr" h="95%">
-            <GridItem>
-              {cart.map((item) => (
-                <CartItem cartItem={item} key={item.name} />
-              ))}
-            </GridItem>
+          <SimpleGrid
+            overflow="auto"
+            h="70%"
+            templateRows="1fr 1fr 1fr 1fr"
+          >
+            {cart.map((item) => (
+              <CartItem cartItem={item} key={item.name} />
+            ))}
+          </SimpleGrid>
+          <SimpleGrid
+            width="95%"
+            height="25%"
+            position={'fixed'}
+            bg="white"
+            borderRadius={5}
+            padding={5}
+            boxShadow={'2px 2px 7px #888888'}
+          >
             <Flex justifyContent="space-between">
               <p>
                 <strong>Total Sum: </strong>
@@ -87,15 +95,19 @@ const Cart = () => {
                 <strong>{cartTotal}kr</strong>
               </p>
             </Flex>
+
             <Button
+              width="100%"
               variant="outline"
               colorScheme="blue"
               onClick={emptyTheCart}
             >
               Tøm handlekurv
             </Button>
-            <Button onClick={onQROpen}>Kjøp</Button>
-          </Grid>
+            <Button width="100%" onClick={onQROpen}>
+              Kjøp
+            </Button>
+          </SimpleGrid>
 
           <Modal
             isOpen={isQROpen}
