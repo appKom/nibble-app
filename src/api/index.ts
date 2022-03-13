@@ -1,4 +1,5 @@
 import { loadToken } from 'api/token';
+import GetToken from 'pages/Cart/GetToken';
 import { Product } from 'types/inventory';
 
 export const CLIENT_ID = encodeURIComponent(
@@ -72,7 +73,7 @@ export const authorizedPost = ({
     headers: {
       ...headers,
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${loadToken()}`,
+      Authorization: `Bearer ${'FUNKE IKKE'}`,
     },
   });
 

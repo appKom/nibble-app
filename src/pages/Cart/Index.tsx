@@ -25,7 +25,8 @@ import QrReader from 'react-qr-reader';
 import { useState } from 'react';
 import purchaseItems from 'api/order';
 import { useUser } from 'state/auth';
-import { getToken } from 'api/token';
+import { loadToken } from 'api/token';
+import GetToken from './GetToken';
 
 const Cart = () => {
   const cartTotal = useGetCartTotal();
@@ -43,31 +44,28 @@ const Cart = () => {
     onClose: onBuyClose,
   } = useDisclosure();
 
-  // blahh
+  // test
   const idTest: any = user?.profile.sub;
-  console.log('tets');
-  console.log(getToken());
-  console.log('tets');
-  // blah
+
+  // test
 
   function emptyTheCart() {
     setCart(emptyCart(cart));
   }
 
   const buyItems = () => {
-    console.log('KJØPT?');
-    purchaseItems(idTest, cart);
+    purchaseItems(idTest, cart).then((response) => {
+      if (response.ok) {
+        console.log('KJØPT!');
+      } else console.log('error!');
+    });
     setConfirmation(true);
     onBuyOpen();
   };
 
   const handleScan = (data: string | null) => {
     if (data?.match('madeByAppkom<3')) {
-      // TODO
-      // Implement buy logic
-
       buyItems();
-
       emptyTheCart();
       onQRClose();
     }
